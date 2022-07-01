@@ -70,36 +70,43 @@ set softtabstop=4
 set shiftwidth=4
 set autoindent  " indent the new line when the previous is indented
 set expandtab  " replace tab with spaces
-set colorcolumn=89  " 88 + 1
+set colorcolumn=79
 """"""""""""""""""""""""""""""""""""""""
 " Python
 autocmd BufNewFile,BufRead *.py
-    \ set colorcolumn=89  " 88 + 1 (Black Style)
+    \ set colorcolumn=79
 """"""""""""""""""""""""""""""""""""""""
 " C/C++ (Google C++ Style Guide)
 autocmd BufNewFile,BufRead *.h,*.c,*.hpp,*.cc,*.cpp
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2 |
-    \ set colorcolumn=81  " 80 + 1
+    \ set colorcolumn=79
 """"""""""""""""""""""""""""""""""""""""
 " Shell
 autocmd BufNewFile,BufRead *.*sh
-    \ set colorcolumn=89
+    \ set colorcolumn=79
 """"""""""""""""""""""""""""""""""""""""
 " Markdown
 autocmd BufNewFile,BufRead *.md
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set colorcolumn=  " no colorcolumn
+    \ set colorcolumn=79  " no colorcolumn
+""""""""""""""""""""""""""""""""""""""""
+" LaTex
+autocmd BufNewFile,BufRead *.tex
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+    \ set colorcolumn=79
 """"""""""""""""""""""""""""""""""""""""
 " Matlab
 autocmd BufNewFile,BufRead *.m
-    \ set colorcolumn=89
+    \ set colorcolumn=79
 """"""""""""""""""""""""""""""""""""""""
 " Java
 autocmd BufNewFile,BufRead *.java
-    \ set colorcolumn=89
+    \ set colorcolumn=79
 """"""""""""""""""""""""""""""""""""""""
 

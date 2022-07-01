@@ -139,20 +139,3 @@ export PS1="\[\033[38;5;12m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\
 [ -e "$DIR_COLORS" ] || DIR_COLORS=""
 eval "`dircolors -b $DIR_COLORS`"
 
-# conda config --set auto_activate_base false
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/lore/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/lore/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/lore/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/lore/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
