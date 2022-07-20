@@ -40,15 +40,30 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ```
 
-### Replace all the dotfiles (TODO: backup the replaced files)
-```sh
-python3.8 ./replace_all_dotfiles.py
-```
-
 ### Switch shell (logout required to make it effective)
 ```sh
 chsh -s $(which zsh)
 ```
 
 ### Run Vundle through vim using :PluginInstall command
+
+### Audio issue on Jabra Elite Active 75t
+```sh
+sudo add-apt-repository ppa:berglh/pulseaudio-a2dp
+sudo apt update
+sudo apt install pulseaudio-modules-bt libldac
+```
+
+### Back up and update all the dotfiles
+```sh
+python3 ./replace_all_dotfiles.py
+```
+
+### Adjust colors in the terminal
+In gnome-terminal, in the top-left corner, select `preferences`, then a profile.  
+In the `Colors` tab, unselect `Use colors from system theme`, for `Buil-in schemes` choose `White on black`.  
+Below, in `Palette` section, select for `Built-in schemes`, the `Tango` option.  
+
+### Add Italian keyboard alongside the English one
+`Settings` >> `Region & Language` >> `Input Sources` >> `+` >> `Italian`
 
