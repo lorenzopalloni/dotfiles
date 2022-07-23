@@ -1,5 +1,11 @@
 ## dotfiles
 
+Quick set-up:
+    1. Run init1.sh
+    2. A public key has been saved in the clipboard, add that one with Ctrl+V [here](https://github.com/settings/keys).
+    3. Run init2.sh
+    4. Execute :PluginInstall in vim
+
 ### Update the system
 ```sh
 apt update
@@ -7,7 +13,9 @@ apt update
 
 ### Install some useful packages
 ```sh
-apt install -y vim zsh tmux git xclip python3.8 python3.8-venv python-pip
+apt install -y vim zsh tmux git \
+    python3.8 python3.8-venv python-pip \
+    xclip xsel
 ```
 
 ### Generate an ssh key
@@ -40,30 +48,40 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ```
 
-### Switch shell (logout required to make it effective)
+### Switch shell Bash -> Zsh
+
+Option #1:
 ```sh
-chsh -s $(which zsh)
+echo "export SHELL=$(which zsh)" >> ~/.profile
+echo "[ -z "$ZSH_VERSION" ] && exec "$SHELL" -ladd" >> ~/.profile
+```
+
+Option #2 (if you have root permissions - logout required)
+```sh
+sudo chsh -s $(which zsh)
 ```
 
 ### Run Vundle through vim using :PluginInstall command
 
-### Audio issue on Jabra Elite Active 75t
+### Miscellaneous:
+
+#### Audio issue on Jabra Elite Active 75t
 ```sh
 sudo add-apt-repository ppa:berglh/pulseaudio-a2dp
 sudo apt update
 sudo apt install pulseaudio-modules-bt libldac
 ```
 
-### Back up and update all the dotfiles
+#### Back up and update all the dotfiles
 ```sh
 python3 ./replace_all_dotfiles.py
 ```
 
-### Adjust colors in the terminal
+#### Adjust colors in the terminal
 In gnome-terminal, in the top-left corner, select `preferences`, then a profile.  
 In the `Colors` tab, unselect `Use colors from system theme`, for `Buil-in schemes` choose `White on black`.  
 Below, in `Palette` section, select for `Built-in schemes`, the `Tango` option.  
 
-### Add Italian keyboard alongside the English one
+#### Add Italian keyboard alongside the English one
 `Settings` >> `Region & Language` >> `Input Sources` >> `+` >> `Italian`
 
