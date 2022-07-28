@@ -16,9 +16,10 @@ apt update
 
 2. Install some useful packages
 ```sh
-apt install -y vim zsh tmux git \
+apt install -y vim-gtk3 zsh tmux git \
     python3.8 python3.8-venv python-pip \
-    xclip xsel
+    xclip xsel \
+    tree
 ```
 
 3. Generate an ssh key
@@ -96,3 +97,8 @@ ___
 > ```sh
 > gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
 > ```
+
+#### Visual Studio Code - Hints
+Extensions:
+- Vim
+- install GitLens
