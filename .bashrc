@@ -1,16 +1,15 @@
-########################################
-# /!\/!\ NOT COMPLETELY REVISED /!\/!\
-########################################
+##############################################################################
+# ~/.bashrc /!\/!\ NOT COMPLETELY REVISED /!\/!\
+##############################################################################
 
-########################################
-# ~/.bashrc
-########################################
-
-# If not running interactively, don't do anything
+# if not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Make colorcoding available for everyone
+# set PATH so it includes user's private bin directories
+PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
+# make colorcoding available for everyone
+##############################################################################
 Black='\e[0;30m'        # Black
 Red='\e[0;31m'          # Red
 Green='\e[0;32m'        # Green
@@ -41,41 +40,40 @@ On_Cyan='\e[46m'        # Cyan
 On_White='\e[47m'       # White
 
 NC="\e[m"               # Color Reset
-
+##############################################################################
 
 # new alert text
 ALERT=${BWhite}${On_Red} # Bold White on red background
 
 # mostly used alias functions
+##############################################################################
+#alias cls="clear"
+#alias ..="cd .."
+#alias cd..="cd .."
+#alias ls="ls -CF --color=auto"
+#alias ll="ls -lisa --color=auto"
+#alias lsl="ls -lhFA | less"
+#alias home="cd ~"
+#alias df="df -ahiT --total"
+#alias mkdir="mkdir -pv"
+#alias userlist="cut -d: -f1 /etc/passwd"
+#alias fhere="find . -name "
+#alias free="free -mt"
+#alias du="du -ach | sort -h"
+#alias ps="ps auxf"
+#alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
+#alias wget="wget -c"
+#alias histg="history | grep"
+#alias myip="curl http://ipecho.net/plain; echo"
+#alias logs="find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
+#alias folders='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
+#alias grep='grep --color=auto'
+##############################################################################
 
-alias cls="clear"
-alias ..="cd .."
-alias cd..="cd .."
-alias ls="ls -CF --color=auto"
-alias ll="ls -lisa --color=auto"
-alias lsl="ls -lhFA | less"
-alias home="cd ~"
-alias df="df -ahiT --total"
-alias mkdir="mkdir -pv"
-alias userlist="cut -d: -f1 /etc/passwd"
-alias fhere="find . -name "
-alias free="free -mt"
-alias du="du -ach | sort -h"
-alias ps="ps auxf"
-alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
-alias wget="wget -c"
-alias histg="history | grep"
-alias myip="curl http://ipecho.net/plain; echo"
-alias logs="find /var/log -type f -exec file {} \; | grep 'text' | cut -d' ' -f1 | sed -e's/:$//g' | grep -v '[0-9]$' | xargs tail -f"
-alias folders='find . -maxdepth 1 -type d -print0 | xargs -0 du -sk | sort -rn'
-alias grep='grep --color=auto'
-
-# Creates an archive (*.tar.gz) from given directory.
+# archive tools
+##############################################################################
 function maketar() { tar cvzf "${1%%/}.tar.gz"  "${1%%/}/"; }
-
-# Create a ZIP archive of a file or folder.
 function makezip() { zip -r "${1%%/}.zip" "$1" ; }
-
 function extract {
  if [ -z "$1" ]; then
     # display usage if no parameters given
@@ -107,30 +105,7 @@ function extract {
     fi
 fi
 }
-
-# jump directorys upwards until it hits a directory with multiple folders
-up(){
-  local d=""
-  limit=$1
-  for ((i=1 ; i <= limit ; i++))
-    do
-      d=$d/..
-    done
-  d=$(echo $d | sed 's/^\///')
-  if [ -z "$d" ]; then
-    d=..
-  fi
-  cd $d
-}
-
-# create an directory and directly cd into it
-mcd () {
-  mkdir -p $1
-  cd $1
-}
-
-# set PATH so it includes user's private bin directories
-PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+##############################################################################
 
 export PS1="\[\033[38;5;12m\][\[$(tput sgr0)\]\[\033[38;5;10m\]\u\[$(tput sgr0)\]\[\033[38;5;12m\]@\[$(tput sgr0)\]\[\033[38;5;7m\]\h\[$(tput sgr0)\]\[\033[38;5;12m\]]\[$(tput sgr0)\]\[\033[38;5;15m\]: \[$(tput sgr0)\]\[\033[38;5;7m\]\w\[$(tput sgr0)\]\[\033[38;5;12m\]>\[$(tput sgr0)\]\[\033[38;5;10m\]\\$\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]"
 
