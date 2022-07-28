@@ -13,9 +13,10 @@ apt update
 
 ### Install some useful packages
 ```sh
-apt install -y vim zsh tmux git \
+apt install -y vim-gtk3 zsh tmux git \
     python3.8 python3.8-venv python-pip \
-    xclip xsel
+    xclip xsel \
+    tree
 ```
 
 ### Generate an ssh key
@@ -84,4 +85,9 @@ Below, in `Palette` section, select for `Built-in schemes`, the `Tango` option.
 
 #### Add Italian keyboard alongside the English one
 `Settings` >> `Region & Language` >> `Input Sources` >> `+` >> `Italian`
+
+#### Visual Studio Code - Hints
+Extensions:
+- Vim
+- install GitLens
 
