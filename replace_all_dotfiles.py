@@ -1,3 +1,13 @@
+r"""
+/!\ Dangerous script, need adjustment /!\
+
+Script to copy all dotfiles in "$HOME/". In general, this means that dotfiles
+already present in "$HOME/" will be replaced.
+
+TODO: check if shutil is something that you really need, maybe os is enough.
+TODO: maybe ask before replacing file in home.
+"""
+
 from pathlib import Path
 import os
 import shutil
