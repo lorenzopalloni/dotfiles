@@ -27,26 +27,21 @@ apt install -y vim-gtk3 zsh tmux git \
 ssh-keygen -t rsa -b 4096
 ```
 
-3. Copy the public key
+4. Copy the public key
 ```sh
 xclip -sel clipboard -i ~/.ssh/id_rsa.pub
 ```
 
-4. Paste [here](https://github.com/settings/keys)
+5. Paste [here](https://github.com/settings/keys)
 
-5. Clone this repo
+6. Clone this repo
 ```sh
 git clone git@github.com:lorenzopalloni/dotfiles.git
 ```
 
-6. Install oh-my-zsh
+7. Install oh-my-zsh
 ```sh
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-7. Install Vundle
-```sh
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
 8. Install zsh-syntax-highlighing
@@ -66,10 +61,6 @@ Option #2 (if you have root permissions - logout required)
 ```sh
 sudo chsh -s $(which zsh)
 ```
-
-10. Run Vundle through vim using :PluginInstall command
-
-___
 
 ## Miscellaneous:
 
