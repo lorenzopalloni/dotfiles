@@ -1,19 +1,13 @@
 set nocompatible  " set no compatible with old version of VI
-filetype off  " required by Vundle
 
 """"""""""""""""""""""""""""""""""""""""
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-    " let Vundle manage Vundle, required
-    Plugin 'VundleVim/Vundle.vim'
-    " themes (further configuration below)
-    Plugin 'altercation/vim-colors-solarized'
-    Plugin 'morhetz/gruvbox'
-    Plugin 'acarapetis/vim-colors-github'
-    " utilities
-    Plugin 'vim-airline/vim-airline'
-call vundle#end()
+" Vundle config - START
+"filetype off  " required by Vundle
+"set rtp+=~/.vim/bundle/Vundle.vim  " required by Vundle
+"call vundle#begin()  " required by Vundle
+"    Plugin 'VundleVim/Vundle.vim'  " required by Vundle
+"call vundle#end()  " required by Vundle
+" Vundle config - END
 """"""""""""""""""""""""""""""""""""""""
 
 syntax enable
@@ -24,11 +18,12 @@ set showmode  " show insert/replace/visual mode
 set number relativenumber  " show line numbers (relative)
 set belloff=all  " disable all sounds
 set ttyfast  " more characters will be sent to the screen for redrawing
+set spelllang=en_us,en ",it  " spell checking
 "set cursorline  " highlight current line
 "set ruler  " show the cursor position all the time
 "set showmatch  " highlight matching braces
 
-" time waited for key press(es) to complete. It makes for a faster key response
+" time waited for key press(es) to complete a sequence
 set ttimeout
 set ttimeoutlen=50
 
@@ -48,20 +43,9 @@ set wildignore=*.o,*.obj,*.class,*.pyc
 set wildignore+=*DS_Store*
 set wildignore+=*.png,*.jpg,*.gif,*jpeg,*tif,*tiff
 
-set spelllang=en_us,en ",it  " spell checking
-
-" remove trailing whitespace when saving.
-" to disable it: ":autocmd!"
-"autocmd BufWrite * silent! %s/[ \t\r]\+$//  " old command
-"autocmd BufWritePre * :%s/\s\+$//e  " new command
-
 " themes
 set background=dark
 "call togglebg#map("<F5>")  " press F5 to toggle light/dark
-"colorscheme gruvbox
-"let g:gruvbox_termcolors=256
-"colorscheme solarized
-"let g:solarized_termcolors=256
 
 """"""""""""""""""""""""""""""""""""""""
 " default indentation
