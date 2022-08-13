@@ -27,9 +27,6 @@ export GIT_EDITOR='vim'
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
@@ -37,12 +34,9 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
+# Functions
+venv() { source ~/.venv/"${1:-binarization}"/bin/activate }
+
 # Aliases
 # alias chrome='google-chrome-stable'  # --disable-gpu, --disable-software-rasterizer
-
-# Functions
-venv() { source ~/.venv/"${1:-green}"/bin/activate }
-
-# how to disable the headerbar :D
-# gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
 
