@@ -35,8 +35,5 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 # Functions
-venv() { source ~/.venv/"${1:-binarization}"/bin/activate }
-
-# Aliases
-# alias chrome='google-chrome-stable'  # --disable-gpu, --disable-software-rasterizer
+venv() { source ~/.venv/"${1:-green}"/bin/activate }
 
