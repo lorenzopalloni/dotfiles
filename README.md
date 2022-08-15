@@ -1,66 +1,61 @@
 # dotfiles
 
-## Quick set-up:
+## Ubuntu set-up
+Before cloning [lorenzopalloni/dotfiles](https://github.com/lorenzopalloni/dotfiles) repo, you would probably need to run some of the following instructions. Even tough is not mandatory to follow the order in which they are presented, it is highly recommended. Instructions have been tested on `Ubuntu 20.04`.
 
-    1. Run init1.sh (it saves a public ssh key to the clipboard)
-    2. Paste [here](https://github.com/settings/keys).
-    3. Run init2.sh
-    4. Execute :PluginInstall in vim
-
-## Detailed set-up:
-
-1. Update the system
+---
+### Update the system
 ```sh
 apt update
 ```
 
-2. Install some useful packages
+### Install some useful packages
+Note that `vim-gtk3` is installed in place of `vim` since the latter lacks of clipboard support.
 ```sh
 apt install -y vim-gtk3 zsh tmux git \
     python3.8 python3.8-venv python-pip \
     xclip xsel \
     tree
 ```
-
-3. Generate an ssh key
+---
+### Set up authentication on GitHub
+1. Generate an ssh key
 ```sh
 ssh-keygen -t rsa -b 4096
 ```
-
-4. Copy the public key
+2. Copy the public key
 ```sh
 xclip -sel clipboard -i ~/.ssh/id_rsa.pub
 ```
+3. Paste [in GitHub settings](https://github.com/settings/keys)
 
-5. Paste [here](https://github.com/settings/keys)
-
-6. Clone this repo
+### Clone [lorenzopalloni/dotfiles](https://github.com/lorenzopalloni/dotfiles)
 ```sh
 git clone git@github.com:lorenzopalloni/dotfiles.git
 ```
+---
 
-7. Install oh-my-zsh
-```sh
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-8. Install zsh-syntax-highlighing
-```sh
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-```
-
-9. Switch shell Bash -> Zsh
-
+### Switch shell Bash -> Zsh
 Option #1:
 ```sh
 echo "export SHELL=$(which zsh)" >> ~/.profile
 echo "[ -z "$ZSH_VERSION" ] && exec "$SHELL" -ladd" >> ~/.profile
 ```
-
 Option #2 (if you have root permissions - logout required)
 ```sh
 sudo chsh -s $(which zsh)
 ```
+
+#### Install oh-my-zsh
+```sh
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+####  Install zsh-syntax-highlighing
+```sh
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+```
+---
 
 ## Miscellaneous:
 
@@ -125,4 +120,3 @@ Suggested user settings:
 
 }
 ```
-
