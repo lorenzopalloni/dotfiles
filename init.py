@@ -1,47 +1,77 @@
 r"""
-/!\ Dangerous script, need adjustment /!\
-
 Script to copy all dotfiles in "$HOME/". In general, this means that dotfiles
 already present in "$HOME/" will be replaced.
-
-TODO: check if shutil is something that you really need, maybe os is enough.
-TODO: maybe ask before replacing file in home.
 """
 
-from pathlib import Path
-import os
 import shutil
+from argparse import ArgumentParser
+from pathlib import Path
 
+def parse_args():
+    """Argument parser."""
+    parser = ArgumentParser()
+    parser.add_argument('--input_dir', '-i', default=Path(), type=Path)
+    parser.add_argument('--output_dir', '-o', default=Path.home(), type=Path)
+    return parser.parse_args()
 
-home_dir = Path(os.environ['HOME'])
-dotfiles_dir = Path()
-assert dotfiles_dir.resolve().name == 'dotfiles'
+def copy_safely(src: Path, dst: Path) -> None:
+    """Copy `src` to `dst` asking always for permission.
 
-all_dotfiles = [
-    x for x in Path().iterdir() if not x.is_dir() and str(x).startswith('.')
-]
+    Args:
+        src (Path): source file pathname
+        dst (Path): destination file pathname
+    """
+    print(f"I'm going to copy {src} to {dst}.")
+    ans = input("May I have your permission? [y/N]")
+    trues = ('y', 'yes', '1')
+    falses = ('n', 'no', '0', '')
+    if ans.lower() in trues:
+        shutil.copyfile(src, dst)
+    elif ans.lower() in falses:
+        return None
+    else:
+        return copy_safely(src, dst)
+    return None
 
-num_characters = max((len(dotfile.name) for dotfile in all_dotfiles))
+def copy_all_dotfiles_safely(input_dir: Path, output_dir: Path) -> None:
+    """Copy all dotfiles in `input_dir` to `output_dir`.
 
-for num, dotfile in enumerate(all_dotfiles):
-    new_dotfile_path = dotfile.resolve().as_posix()
-    old_dotfile_path = (home_dir / dotfile.name).as_posix()
-    backup_old_dotfile_path = (
-        home_dir / (dotfile.name + '.backup')
-    ).as_posix()
-    print('({:02d}) {:>{}} has been backed up in {:>{}}.'.format(
-        num + 1,
-        dotfile.name,
-        num_characters,
-        backup_old_dotfile_path,
-        num_characters,
-    ))
-    shutil.copyfile(old_dotfile_path, backup_old_dotfile_path)
-    print('{:>{}} has been updated with {:>{}}.'.format(
-        dotfile.name,
-        num_characters + 5,
-        new_dotfile_path,
-        num_characters,
-    ))
-    shutil.copyfile(new_dotfile_path, old_dotfile_path)
+    Args:
+        src (Path): source directory pathname
+        dst (Path): destination directory pathname
+    """
+    print(f'input_dir: {input_dir}')
+    print(f'output_dir: {output_dir}')
 
+    assert input_dir.resolve().name == 'dotfiles',\
+        "Please, provided an `input_dir` that is the dotfiles repo path."
+
+    excluded = ['.gitignore']
+    all_dotfiles = [
+        x for x in input_dir.iterdir()
+        if (
+            not x.is_dir()
+            and str(x).startswith('.')
+            and x.name not in excluded
+        )
+    ]
+
+    for i, new in enumerate(all_dotfiles, start=1):
+        print(f'[ {i} / {len(all_dotfiles)} ]')
+        old = output_dir / new.name
+        backup = output_dir / (new.name + '.backup')
+        if backup.exists():
+            print(f"Warning: A backup file for {new.name} already exists.")
+        copy_safely(old.as_posix(), backup.as_posix())
+        copy_safely(new.resolve().as_posix(), old.as_posix())
+
+def main():
+    """Parse user-provided arguments and copy all dotfiles safely."""
+    args = parse_args()
+    copy_all_dotfiles_safely(
+        input_dir=args.input_dir,
+        output_dir=args.output_dir
+    )
+
+if __name__ == '__main__':
+    main()
