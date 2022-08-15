@@ -16,7 +16,7 @@ def parse_args():
 
 def copy_safely(src: Path, dst: Path) -> None:
     """Copy `src` to `dst` asking always for permission.
-    
+
     Args:
         src (Path): source file pathname
         dst (Path): destination file pathname
@@ -66,8 +66,12 @@ def copy_all_dotfiles_safely(input_dir: Path, output_dir: Path) -> None:
         copy_safely(new.resolve().as_posix(), old.as_posix())
 
 def main():
+    """Parse user-provided arguments and copy all dotfiles safely."""
     args = parse_args()
-    move_safely(input_dir=args.input_dir, output_dir=args.output_dir)
+    copy_all_dotfiles_safely(
+        input_dir=args.input_dir,
+        output_dir=args.output_dir
+    )
 
 if __name__ == '__main__':
     main()
