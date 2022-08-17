@@ -93,6 +93,10 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/
 > snap remove --revision <insert-revision-number> <package-name>
 > ```
 
+> ### Evolution Alarm Notify continues pop-up reminders even though notifications disabled.
+> In the file `/etc/xdg/autostart/org.gnome.Evolution-alarm-notify.desktop`, change the line
+> `OnlyShowIn=GNOME;Unity;XFCE;Dawati;MATE;` to `NotShowIn=GNOME;`
+
 #### Visual Studio Code - Hints
 Extensions:
 - Vim
