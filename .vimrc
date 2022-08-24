@@ -1,15 +1,5 @@
 set nocompatible  " set no compatible with old version of VI
 
-""""""""""""""""""""""""""""""""""""""""
-" Vundle config - START
-"filetype off  " required by Vundle
-"set rtp+=~/.vim/bundle/Vundle.vim  " required by Vundle
-"call vundle#begin()  " required by Vundle
-"    Plugin 'VundleVim/Vundle.vim'  " required by Vundle
-"call vundle#end()  " required by Vundle
-" Vundle config - END
-""""""""""""""""""""""""""""""""""""""""
-
 syntax enable
 
 set nowrap  " do not wrap portions of text that overflow the window width
@@ -76,7 +66,8 @@ autocmd BufNewFile,BufRead *.md
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set colorcolumn=79  " no colorcolumn
+    \ set wrap |
+    \ set colorcolumn=  " no colorcolumn
 """"""""""""""""""""""""""""""""""""""""
 " LaTex
 autocmd BufNewFile,BufRead *.tex
