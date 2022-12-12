@@ -84,4 +84,3 @@ autocmd BufNewFile,BufRead *.m
 autocmd BufNewFile,BufRead *.java
     \ set colorcolumn=79
 """"""""""""""""""""""""""""""""""""""""
-
