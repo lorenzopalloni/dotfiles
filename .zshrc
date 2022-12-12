@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Prevent pipe to vanish after a completion
 ZLE_REMOVE_SUFFIX_CHARS=""
 
@@ -33,6 +30,10 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+# Overwrite ~/.oh-my-zsh/lib/misc.zsh configurations
+export PAGER='less'
+export LESS='-F -R'
 
 # Functions
 venv() { source ~/.venv/"${1:-green}"/bin/activate }
