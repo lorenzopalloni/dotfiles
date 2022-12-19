@@ -1,6 +1,7 @@
 r"""
-Script to copy all dotfiles in "$HOME/". In general, this means that dotfiles
-already present in "$HOME/" will be replaced.
+Copies all dotfiles in "$HOME/".
+
+This means that dotfiles already present in "$HOME/" will be replaced.
 """
 
 import shutil
@@ -67,8 +68,8 @@ def copy_all_dotfiles_safely(input_dir: Path, output_dir: Path) -> None:
         backup = output_dir / (new.name + ".backup")
         if backup.exists():
             print(f"Warning: A backup file for {new.name} already exists.")
-        copy_safely(old.as_posix(), backup.as_posix())
-        copy_safely(new.resolve().as_posix(), old.as_posix())
+        copy_safely(old, backup)
+        copy_safely(new.absolute(), old)
 
 
 def main():
