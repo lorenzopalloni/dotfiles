@@ -67,8 +67,9 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/
 > ```
 
 > ### Back up and update all the dotfiles
+> Make sure that `python` is linked to a 3.X python version.
 > ```sh
-> python3 ./replace_all_dotfiles.py
+> python ./init.py
 > ```
 
 > ### Adjust colors in the terminal  
