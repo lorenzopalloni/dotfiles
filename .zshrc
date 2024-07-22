@@ -1,3 +1,6 @@
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 # Prevent pipe to vanish after a completion
 ZLE_REMOVE_SUFFIX_CHARS=""
 
@@ -24,6 +27,9 @@ export GIT_EDITOR='vim'
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
+# ssh
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
+
 ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
   mkdir $ZSH_CACHE_DIR
@@ -31,10 +37,9 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-# Overwrite ~/.oh-my-zsh/lib/misc.zsh configurations
-export PAGER='less'
-export LESS='-F -R'
-
 # Functions
 venv() { source ~/.venv/"${1:-green}"/bin/activate }
+
+# disable the headerbar
+# gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
 
