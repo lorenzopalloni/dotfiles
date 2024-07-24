@@ -1,5 +1,59 @@
 # dotfiles
 
+## nvm in .zshrc
+```
+# nvm configurations
+####################################################################
+if [ -z "$NVM_DIR" ]; then
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+fi
+
+# Function to load nvm
+load_nvm() {
+    if [ -z "$NVM_LOADED" ]; then
+        if [ -s "$NVM_DIR/nvm.sh" ]; then
+            \. "$NVM_DIR/nvm.sh"
+            export NVM_LOADED=1
+            echo "NVM initialized. Please run your command again."
+        fi
+    fi
+}
+
+nvm() {
+    if [ -z "$NVM_LOADED" ]; then
+        load_nvm
+    else
+        nvm $@
+    fi
+}
+
+node() {
+    if [ -z "$NVM_LOADED" ]; then
+        load_nvm
+    else
+        node $@
+    fi
+}
+
+npm() {
+    if [ -z "$npm_LOADED" ]; then
+        load_npm
+    else
+        npm $@
+    fi
+}
+
+npx() {
+    if [ -z "$npx_LOADED" ]; then
+        load_npx
+    else
+        npx $@
+    fi
+}
+####################################################################
+####################################################################
+```
+
 ## Install a vim plugin manager
 Install [`vim-plug`](https://github.com/junegunn/vim-plug?tab=readme-ov-file#installation):
 ```sh

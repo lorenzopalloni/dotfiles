@@ -1,3 +1,7 @@
+# .zshrc
+#####################################################################
+#####################################################################
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -19,8 +23,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 plugins=(git zsh-syntax-highlighting)
 
-########################################
-# User configuration
 export EDITOR='vim'
 export GIT_EDITOR='vim'
 
@@ -42,4 +44,55 @@ venv() { source ~/.venv/"${1:-green}"/bin/activate }
 
 # disable the headerbar
 # gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
+
+# nvm configurations
+####################################################################
+if [ -z "$NVM_DIR" ]; then
+    export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+fi
+
+# Function to load nvm
+load_nvm() {
+    if [ -z "$NVM_LOADED" ]; then
+        if [ -s "$NVM_DIR/nvm.sh" ]; then
+            \. "$NVM_DIR/nvm.sh"
+            export NVM_LOADED=1
+            echo "NVM initialized. Please run your command again."
+        fi
+    fi
+}
+
+nvm() {
+    if [ -z "$NVM_LOADED" ]; then
+        load_nvm
+    else
+        nvm $@
+    fi
+}
+
+node() {
+    if [ -z "$NVM_LOADED" ]; then
+        load_nvm
+    else
+        node $@
+    fi
+}
+
+npm() {
+    if [ -z "$npm_LOADED" ]; then
+        load_npm
+    else
+        npm $@
+    fi
+}
+
+npx() {
+    if [ -z "$npx_LOADED" ]; then
+        load_npx
+    else
+        npx $@
+    fi
+}
+####################################################################
+####################################################################
 
