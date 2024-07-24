@@ -79,7 +79,7 @@ node() {
 }
 
 npm() {
-    if [ -z "$npm_LOADED" ]; then
+    if [ -z "$NVM_LOADED" ]; then
         load_nvm
     else
         command npm "$@"
@@ -87,7 +87,7 @@ npm() {
 }
 
 npx() {
-    if [ -z "$npx_LOADED" ]; then
+    if [ -z "$NVM_LOADED" ]; then
         load_nvm
     else
         command npx "$@"
