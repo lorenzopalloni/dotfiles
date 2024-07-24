@@ -66,7 +66,7 @@ nvm() {
     if [ -z "$NVM_LOADED" ]; then
         load_nvm
     else
-        nvm $@
+        command nvm "$@"
     fi
 }
 
@@ -74,7 +74,7 @@ node() {
     if [ -z "$NVM_LOADED" ]; then
         load_nvm
     else
-        node $@
+        command node "$@"
     fi
 }
 
@@ -82,7 +82,7 @@ npm() {
     if [ -z "$npm_LOADED" ]; then
         load_npm
     else
-        npm $@
+        command npm "$@"
     fi
 }
 
@@ -90,7 +90,7 @@ npx() {
     if [ -z "$npx_LOADED" ]; then
         load_npx
     else
-        npx $@
+        command npx "$@"
     fi
 }
 ####################################################################
