@@ -1,5 +1,15 @@
 # dotfiles
 
+## Install a Vim plugin manager
+Install [`vim-plug`](https://github.com/junegunn/vim-plug?tab=readme-ov-file#installation):
+```sh
+mkdir -p ~/.vim/autoload/
+```
+```sh
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
 ## Ubuntu set-up
 Before cloning [lorenzopalloni/dotfiles](https://github.com/lorenzopalloni/dotfiles) repo, you would probably need to run some of the following instructions. Although it is not mandatory to follow the order in which they are presented, it is highly recommended. Instructions have been tested on `Ubuntu 20.04`.
 
