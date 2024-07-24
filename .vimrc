@@ -102,7 +102,7 @@ augroup filetype_settings
     autocmd!
     autocmd FileType python setlocal colorcolumn=79
     autocmd FileType c,cpp,h,hpp,json,ino setlocal tabstop=2 softtabstop=2 shiftwidth=2 colorcolumn=79
-    autocmd FileType sh, bash, zsh setlocal colorcolumn=79
+    autocmd FileType sh,bash,zsh setlocal colorcolumn=79
     autocmd FileType markdown setlocal tabstop=4 softtabstop=4 shiftwidth=4 colorcolumn=
     autocmd FileType tex setlocal tabstop=2 softtabstop=2 shiftwidth=2 colorcolumn=79
     autocmd FileType matlab setlocal colorcolumn=79
