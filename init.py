@@ -1,4 +1,4 @@
-r"""
+"""
 Copies all dotfiles in "$HOME/".
 
 This means that dotfiles already present in "$HOME/" will be replaced.
