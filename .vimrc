@@ -18,6 +18,8 @@ Plug 'itchyny/lightline.vim'
 " File explorer
 Plug 'preservim/nerdtree'
 " Shortcut: <C-n> to toggle NERDTree sidebar
+" Mapping:
+nmap <C-n> :NERDTreeToggle<CR>
 
 " Fuzzy Finder
 Plug 'junegunn/fzf', { 'do': './install --all' }
@@ -33,14 +35,15 @@ Plug 'christoomey/vim-tmux-navigator'
 " <C-h>, <C-j>, <C-k>, <C-l> - Move between Vim splits and tmux panes
 
 " Autocompletion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Shortcuts:
 " gd - Go to definition
 " gr - Find references
 " gi - Go to implementation
 
 " GitHub Copilot
-Plug 'github/copilot.vim'
+
+"Plug 'github/copilot.vim'
 " Shortcut: <Tab> to accept Copilot suggestion
 
 Plug 'tpope/vim-commentary'
@@ -55,6 +58,14 @@ Plug 'dense-analysis/ale'
 " :ALEToggle - Toggle linting
 " [e - Go to previous linting error
 " ]e - Go to next linting error
+
+" Settings:
+let g:ale_enabled = 0
+let g:ale_linters = {
+    \ 'python': ['flake8', 'mypy'],
+    \ 'cpp': ['clangd'],
+    \ 'c': ['clangd'],
+    \ }
 
 " Shortcuts for text objects
 Plug 'tpope/vim-surround'
@@ -73,6 +84,15 @@ Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 " Git integration
 Plug 'airblade/vim-gitgutter'
+
+""""""""""""""""""""""""""""""""""""""""
+" Plugin Settings
+
+" GitHub Copilot settings
+"let g:copilot_no_tab_map = v:true
+"imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
+
+""""""""""""""""""""""""""""""""""""""""
 
 call plug#end()
 """""""""""""""""""""""""""""""""""""""""
@@ -159,30 +179,24 @@ augroup filetype_settings
         \ let b:copilot_enabled = 0 |
         \ let b:coc_enabled = 0 |
         \ let b:ale_enabled = 0 |
-        \ let b:gitgutter_enabled = 0 |
-        \ setlocal spell |
-        \ setlocal wrap |
-        \ setlocal textwidth=80
+        \ let b:gitgutter_enabled = 0
 augroup END
 """"""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""
-" Plugin Settings
+" Quick-save/compile keys
+set makeprg=make\ -j8
 
-" GitHub Copilot settings
-"let g:copilot_no_tab_map = v:true
-"imap <silent><script><expr> <C-L> copilot#Accept("\<CR>")
+" <F8> : write current file, run :make, show errors in quickfix
+nnoremap <silent> <F8> :update<CR>:make<CR>
 
-" ALE settings
-let g:ale_linters = {
-    \ 'python': ['flake8', 'mypy'],
-    \ 'cpp': ['clangd'],
-    \ 'c': ['clangd'],
-    \ }
+" <F9> : write, compile, then run the target defined in Makefile
+nnoremap <silent> <F9> :update<CR>:make run<CR>
 
-" NERDTree mapping
-nmap <C-n> :NERDTreeToggle<CR>
+" Open quickfix automatically if :make produced any errors
+autocmd QuickFixCmdPost make cwindow
+
 """"""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""
 
