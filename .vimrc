@@ -77,6 +77,7 @@ Plug 'tpope/vim-surround'
 
 " Syntax Highlighting and indentation
 Plug 'sheerun/vim-polyglot'
+let g:polyglot_disabled = ["autoindent"]
 
 " DOcumentation GEnerator
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
