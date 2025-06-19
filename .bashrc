@@ -34,9 +34,11 @@ fi
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 
+# Python's venv
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # --- THE PROMPT (PS1) ---
-PS1='\[\033[01;36m\]\w\[\033[00m\]\[\033[01;33m\]$(__git_ps1 " (%s)")\[\033[00m\] \$ '
+PS1='${VIRTUAL_ENV:+(\[\033[01;37m\]$(basename "$VIRTUAL_ENV")\[\033[00m\]) } \[\033[01;36m\]\w\[\033[00m\]\[\033[01;33m\]$(__git_ps1 " (%s)")\[\033[00m\] \$ '
 
 
 # --- ESSENTIALS ---
@@ -53,4 +55,32 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias diff='diff --color=auto'
+
+# --- PYTHON VENV HELPER FUNCTION (Central Directory Version) ---
+# Manages virtual environments located in a central ~/.venv/ directory.
+venv() {
+    local VENV_BASE_DIR="$HOME/.venv"
+
+    # Ensure the base directory exists.
+    mkdir -p "$VENV_BASE_DIR"
+
+    # If no argument is given, list available environments and return.
+    if [ -z "$1" ]; then
+        echo "Available virtual environments in $VENV_BASE_DIR:"
+        # List only directories, in columns
+        ls -C -d "$VENV_BASE_DIR"/*/ | xargs -n 1 basename
+        return 0
+    fi
+
+    local VENV_DIR="$VENV_BASE_DIR/$1"
+
+    # If the venv directory doesn't exist, create it using python3.
+    if [ ! -d "$VENV_DIR" ]; then
+        echo "Creating and activating new venv: $1"
+        python3 -m venv "$VENV_DIR"
+    fi
+
+    # Activate the environment.
+    source "$VENV_DIR/bin/activate"
+}
 
