@@ -1,6 +1,5 @@
 set nocompatible  " set no compatible with old version of VI
 
-
 """""""""""""""""""""""""""""""""""""""""
 " Automatically set up plug-vim environment
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -147,10 +146,22 @@ set wildignore+=*.png,*.jpg,*.gif,*jpeg,*tif,*tiff
 
 set spelllang=en_us,en ",it  " spell checking
 
-" remove trailing whitespace when saving.
-" to disable it: ":autocmd!"
-"autocmd BufWrite * silent! %s/[ \t\r]\+$//  " old command
-autocmd BufWritePre * :%s/\s\+$//e  " new command
+" Trailing whitespace
+" highlight it everywhere (except while typing at the end of a line)
+augroup trailing_whitespace
+    autocmd!
+    autocmd ColorScheme * highlight ExtraWhitespace guibg=#ffd7d7 ctermbg=224
+    autocmd BufWinEnter,InsertLeave * match ExtraWhitespace /\s\+$/
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+augroup END
+
+" strip it on save only for these filetypes (vendor C code stays untouched)
+command! -bar StripWhitespace let w:strip_view = winsaveview() | keeppatterns %s/\s\+$//e | call winrestview(w:strip_view)
+augroup strip_whitespace
+    autocmd!
+    autocmd BufWritePre * if index(['python', 'sh', 'zsh', 'vim'], &filetype) >= 0 | StripWhitespace | endif
+augroup END
+" anywhere else, run :StripWhitespace by hand
 
 """""""""""""""""""""""""""""""""""""""""
 " Theme Settings
@@ -158,7 +169,7 @@ if has("termguicolors")
   set termguicolors
 endif
 "call togglebg#map("<F5>")  " press F5 to toggle light/dark
-set background=dark
+set background=light
 colorscheme PaperColor
 " colorscheme gruvbox
 """""""""""""""""""""""""""""""""""""""""

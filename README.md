@@ -1,96 +1,77 @@
 # dotfiles
 
-## Install a vim plugin manager
-Install [`vim-plug`](https://github.com/junegunn/vim-plug?tab=readme-ov-file#installation):
+Configuration for zsh, vim and tmux, tested on Arch Linux (GNOME, Wayland).
+The files live in this repo; `$HOME` only holds symlinks to them.
+
+## Set-up (Arch Linux)
+
+### 1. Install packages
 ```sh
-mkdir -p ~/.vim/autoload/
+sudo pacman -S zsh vim tmux git wl-clipboard \
+    zsh-syntax-highlighting zsh-autosuggestions fzf
 ```
+`mise` (tool version manager) is also expected by `.zshrc`.
+
+### 2. Clone the repo
 ```sh
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+git clone git@github.com:lorenzopalloni/dotfiles.git ~/Documents/dotfiles
 ```
 
-## fix coloscheme issue with vim + tmux
-Add this to your .vimrc file:
-```
-if exists('+termguicolors')
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-    set termguicolors
-endif
+### 3. Link the dotfiles into `$HOME`
+Back up any existing file first (`ln -sf` overwrites it).
+```sh
+ln -sf ~/Documents/dotfiles/.vimrc ~/.vimrc
+ln -sf ~/Documents/dotfiles/.zshrc ~/.zshrc
+ln -sf ~/Documents/dotfiles/.tmux.conf ~/.tmux.conf
 ```
 
-
-## Ubuntu set-up
-Before cloning [lorenzopalloni/dotfiles](https://github.com/lorenzopalloni/dotfiles) repo, you would probably need to run some of the following instructions. Although it is not mandatory to follow the order in which they are presented, it is highly recommended. Instructions have been tested on `Ubuntu 20.04`.
-
----
-### Update the system
+### 4. Make zsh the login shell (logout required)
 ```sh
-apt update
+chsh -s /usr/bin/zsh
 ```
 
-### Install some useful packages
-Note that `vim-gtk3` is installed in place of `vim` since the latter lacks of clipboard support.
-```sh
-apt install -y vim-gtk3 zsh tmux git \
-    python3.8 python3.8-venv python-pip \
-    xclip xsel \
-    tree
-```
----
-### Set up authentication on GitHub
-1. Generate an ssh key
-```sh
-ssh-keygen -t rsa -b 4096
-```
-2. Copy the public key
-```sh
-xclip -sel clipboard -i ~/.ssh/id_rsa.pub
-```
-3. Paste [in GitHub settings](https://github.com/settings/keys)
+The first time vim starts, it installs `vim-plug` and all plugins by itself.
 
-### Clone [lorenzopalloni/dotfiles](https://github.com/lorenzopalloni/dotfiles)
-```sh
-git clone git@github.com:lorenzopalloni/dotfiles.git
-```
----
+On machines where the zsh plugins or fzf are not installed (e.g. servers),
+`.zshrc` simply skips them.
 
-### Switch shell Bash -> Zsh
-Option #1:
-```sh
-echo "export SHELL=$(which zsh)" >> ~/.profile
-echo "[ -z "$ZSH_VERSION" ] && exec "$SHELL" -ladd" >> ~/.profile
-```
-Option #2 (if you have root permissions - logout required)
-```sh
-sudo chsh -s $(which zsh)
-```
+## Cheat sheet
 
-#### Install oh-my-zsh
-```sh
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
+### zsh (vi mode)
+| Keys | Action |
+|---|---|
+| `Esc` | normal mode (block cursor); `i`/`a`/`A` back to insert (beam cursor) |
+| `ciw`, `ci"`, `da(`, `dw`, ... | vim motions and text objects |
+| `Up`/`Down`, `k`/`j` (normal) | history search for commands starting with what is typed |
+| `v` (normal) | edit the current command line in vim |
+| `Ctrl-R` / `Ctrl-T` / `Alt-C` | fzf: history / insert file path / cd into subdirectory |
+| `Right` or `End` | accept the grey autosuggestion |
+| `Ctrl-A` / `Ctrl-E` (insert) | start / end of line |
 
-####  Install zsh-syntax-highlighing
-```sh
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-```
----
+### tmux (prefix: `Ctrl-a`)
+| Keys | Action |
+|---|---|
+| `Ctrl-h/j/k/l` | move between tmux panes and vim splits |
+| `prefix Ctrl-l` | clear the screen |
+| `prefix [`, `Space` ... `y` | copy mode: `Space` starts the selection, `y` copies it to the system clipboard (mouse drag works too) |
+| `prefix p` | paste from the system clipboard |
 
-## Miscellaneous:
+### vim
+| Keys / command | Action |
+|---|---|
+| `Ctrl-n` | toggle NERDTree |
+| `:Files`, `:Rg`, `:Buffers` | fzf search |
+| `:StripWhitespace` | remove trailing whitespace (automatic on save only for python/sh/zsh/vim) |
+| `F8` / `F9` | `:make` / `:make run` |
+
+## Miscellaneous
+Older notes, some specific to Ubuntu.
 
 > ### Audio issue on Jabra Elite Active 75t
 > ```sh
 > sudo add-apt-repository ppa:berglh/pulseaudio-a2dp
 > sudo apt update
 > sudo apt install pulseaudio-modules-bt libldac
-> ```
-
-> ### Back up and update all the dotfiles
-> Make sure that `python` is linked to a 3.X python version.
-> ```sh
-> python ./init.py
 > ```
 
 > ### Adjust colors in the terminal  
